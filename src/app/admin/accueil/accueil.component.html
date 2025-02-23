@@ -1,0 +1,54 @@
+<div class="container text-center">
+  <div class="row">
+    <div class="col">
+
+    </div>
+    <div class="col">
+      <form #addUser="ngForm" (ngSubmit)="update()">
+        <div class="mb-3">
+          <label class="form-label">Nom</label>
+        <input type="text" class="form-control" name="nom" [(ngModel)]="user.name" #nom="ngModel" required>
+          <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="alert alert-danger">
+            <div *ngIf="nom.errors?.['required']">
+              Nom obligatoire.
+            </div>
+            </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="text" class="form-control" name="email" [(ngModel)]="user.email" #email="ngModel" required>
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+          <div *ngIf="email.errors?.['required']">
+            Email obligatoire.
+          </div>
+          <div *ngIf="email.errors?.['email']">
+            Email invalide.
+          </div>
+      </div>
+      </div>
+
+
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" name="password" [(ngModel)]="user.password" #password="ngModel" required>
+            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+              <div *ngIf="password.errors?.['required']">
+                Mot de passe obligatoire.
+              </div>
+            </div>
+      </div>
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary" [disabled]="addUser.invalid">Submit</button>
+      </div>
+
+
+
+
+      </form>
+
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+</div>

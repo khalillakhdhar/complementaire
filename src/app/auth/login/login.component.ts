@@ -18,6 +18,7 @@ login()
   if(user)
   {
     console.log('login success');
+    window.location.href="../admin";
   }
   else
   {
