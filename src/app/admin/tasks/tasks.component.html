@@ -1,1 +1,70 @@
-<p>tasks works!</p>
+<!-- Button trigger modal -->
+ <div class="text-center">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+Ajouter une tache
+</button>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Ajout de tache</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #taskForm="ngForm">
+          <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input type="text" class="form-control" name="title" [(ngModel)]="task.title" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" name="description" [(ngModel)]="task.description" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Date</label>
+            <input type="date" class="form-control" name="date" [(ngModel)]="task.date" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Etat</label>
+            <select class="form-select" name="status" [(ngModel)]="task.status" required>
+              <option value="todo">A faire</option>
+              <option value="done">Fait</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary" (click)="addTask()">Ajouter</button>
+        </form>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<table class="table table-bordered table-responsive">
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Description</th>
+      <th>Date</th>
+      <th>Etat</th>
+      <th *ngIf="grade=='admin'">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let task of tasks; let i=index">
+      <td>{{ task.title }}</td>
+      <td>{{ task.description }}</td>
+      <td>{{ task.date }}</td>
+      <td><input type="checkbox" [checked]="task.status ? 'done' : 'todo' " disabled></td>
+      <td *ngIf="grade=='admin'">
+
+        <button (click)="deleteTask(i)" class="btn btn-danger">Supprimer</button>
+      </td>
+    </tr>
+
+</table>
